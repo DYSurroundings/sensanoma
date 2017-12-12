@@ -150,19 +150,28 @@ class Sensor
         return SensorNode::find($this->getSensorNodeId());
     }
 
+    public function getLastValue($period, $group, TransformerInterface $transformer)
+    {
+        $result = $this->getData($period, $group, $transformer)->first()['values'][0];
+
+        $result = $this->toKeyValue($result);
+
+        return $result;
+    }
+
     public function getLastMonth(TransformerInterface $transformer)
     {
-        return $this->getData('30d', '2d', $transformer);
+        return $this->getLastValue('30d', '30d', $transformer);
     }
 
-    public function getLastWeek($transformer)
+    public function getLastWeek(TransformerInterface $transformer)
     {
-        return $this->getData('7d', '12h', $transformer);
+        return $this->getLastValue('7d', '7d', $transformer);
     }
 
-    public function getLastDay($transformer)
+    public function getLastDay(TransformerInterface $transformer)
     {
-        return $this->getData('1d', '1h', $transformer);
+        return $this->getLastValue('24h', '24h', $transformer);
     }
 
     public function studlyName()
@@ -191,7 +200,7 @@ class Sensor
 
     }
 
-    public function getLastValue()
+    public function getLatestValue()
     {
         $reader = new InfluxReader();
 
@@ -218,6 +227,18 @@ class Sensor
 
     }
 
+    /**
+     * @param $result
+     * @return array
+     */
+    private function toKeyValue($result)
+    {
+        $result = [
+            'time' => $result[0],
+            'value' => $result[1]
+        ];
+        return $result;
+    }
 
 
 }

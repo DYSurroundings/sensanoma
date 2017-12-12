@@ -9,12 +9,18 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('area', 'AreaController');
         Route::resource('zone', 'ZoneController');
         Route::resource('sensor_node', 'SensorNodeController');
-        Route::delete('user/account/{user}', 'UserController@destroy')->name('user.destroy');
-        Route::delete('user/{user}', 'UserController@viewerDestroy')->name('viewer.destroy');
+        Route::delete('user', 'UserController@destroy')->name('user.destroy');
+        Route::delete('user{id}', 'UserController@viewerDestroy')->name('viewer.destroy');
     });
 
-    Route::get('user', 'UserController@profile')->name('user.profile');
-    Route::put('user' , 'UserController@update')->name('user.profile.update');
+    Route::get('user', 'UserController@profile');
+    Route::put('user' , 'UserController@update');
+    // Route::delete('profile/{id}' , 'UserController@destroy');
+
+    Route::get('/dashboard', 'DashboardController@index');
+
+    Route::get('sensor_node/{id}/{sensor}/{date}', 'SensorController@show');
+
 });
 
 Auth::routes();

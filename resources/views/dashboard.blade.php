@@ -26,7 +26,7 @@
                         <i class="fa fa-{{$sensor->getIcon()}}"></i>
                     </div>
 
-                    <a href="{{ url('/sensor_node/'. $sensor->sensorNode()->id . '/' . $sensor->getName()) }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="{{ url('/sensor_node/'. $sensor->sensorNode()->id . '/' . $sensor->getName()) }}/24h" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             @endforeach

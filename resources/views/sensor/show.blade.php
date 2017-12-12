@@ -4,39 +4,40 @@
     <h1>{{$sensor->getName()}}</h1>
 @stop
 @section('content')
+
     <div class="row">
         <div class="col-lg-4 col-xs-6 disabled">
             <!-- small box -->
             <div class="small-box" style="background-color: {{$sensor->getColor()}}">
                 <div class="inner">
-                    @if(is_null($sensor->getLastDay()))
-                        <h3>Need more data</h3>
+                    @if(is_null($sensor->getLastDay($passThroughTransformer)['value']))
+                        <h3>No data received</h3>
                     @else
-                        <h3>{{$sensor->getLastDay()}}<sup>{{$sensor->getUnit()}}</sup></h3>
+                        <h3>{{number_format($sensor->getLastDay($passThroughTransformer)['value'],2)}}<sup>{{$sensor->getUnit()}}</sup></h3>
                     @endif
-                    <p>Last 24 hours</p>
+                    <p>Median {{$sensor->getUnit()}} for the last  24 hours</p>
                 </div>
                 <div class="icon">
                     <i class="fa fa-{{$sensor->getIcon()}}"></i>
                 </div>
-                <a href="{{ 'day' }}" class="small-box-footer">Last 24 hours  <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="{{ url('/sensor_node/'. $sensor->sensorNode()->id . '/' . $sensor->getName()) }}/24h" class="small-box-footer">Last 24 hours  <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <div class="col-lg-4 col-xs-6">
             <!-- small box -->
             <div class="small-box" style="background-color: {{$sensor->getColor()}}">
                 <div class="inner">
-                    @if(is_null($sensor->getLastWeek()))
+                    @if(is_null($sensor->getLastWeek($passThroughTransformer)['value']))
                         <h3>Need more data</h3>
                     @else
-                        <h3>{{$sensor->getLastWeek()}}<sup>{{$sensor->getUnit()}}</sup></h3>
+                        <h3>{{number_format($sensor->getLastWeek($passThroughTransformer)['value'],2)}}<sup>{{$sensor->getUnit()}}</sup></h3>
                     @endif
-                    <p>Last 7 days</p>
+                    <p>Median {{$sensor->getUnit()}} for the last 7 days</p>
                 </div>
                 <div class="icon">
                     <i class="fa fa-{{$sensor->getIcon()}}"></i>
                 </div>
-                <a href="{{ 'day' }}" class="small-box-footer">Last 7 days  <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="{{ url('/sensor_node/'. $sensor->sensorNode()->id . '/' . $sensor->getName()) }}/7days" class="small-box-footer">Last 7 days  <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <div class="col-lg-4 col-xs-6">
@@ -44,17 +45,17 @@
             <div class="small-box" style="background-color: {{$sensor->getColor()}}">
                 <div class="inner">
 
-                    @if(is_null($sensor->getLastMonth()))
+                    @if(is_null($sensor->getLastMonth($passThroughTransformer)['value']))
                         <h3>Need more data</h3>
                     @else
-                    <h3>{{$sensor->getLastMonth()}}<sup>{{$sensor->getUnit()}}</sup></h3>
+                    <h3>{{number_format($sensor->getLastMonth($passThroughTransformer)['value'],2)}}<sup>{{$sensor->getUnit()}}</sup></h3>
                     @endif
-                    <p>Last 30 days</p>
+                    <p>Median {{$sensor->getUnit()}} for the last 30 days</p>
                 </div>
                 <div class="icon">
                     <i class="fa fa-{{$sensor->getIcon()}}"></i>
                 </div>
-                <a href="{{ 'day' }}" class="small-box-footer">Last 30 days  <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="{{ url('/sensor_node/'. $sensor->sensorNode()->id . '/' . $sensor->getName()) }}/30days" class="small-box-footer">Last 30 days  <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
 
