@@ -7,8 +7,6 @@ namespace App\Sensanoma;
 use App\Models\SensorNode;
 use App\Sensanoma\Storage\QueryBuilder\InfluxQueryBuilder;
 use App\Sensanoma\Storage\Reader\InfluxReader;
-use App\Sensanoma\Transformer\ConsoleTvChartTransformer;
-use App\Sensanoma\Transformer\LastAverageResultTransformer;
 use App\Sensanoma\Transformer\TransformerInterface;
 use Carbon\Carbon;
 
@@ -87,8 +85,17 @@ class Sensor
             case 'air':
                 $this->setColor('#00c0ef');
                 break;
-            case 'radiation':
-                $this->setColor('rgb(255, 215, 0)');
+            case 'soil':
+                $this->setColor('#582900');
+                break;
+            case 'solar':
+                $this->setColor('gold');
+                break;
+            case 'voltage':
+                $this->setColor('#128CDC');
+                break;
+            case 'sensortemp':
+                $this->setColor('#00a65a');
                 break;
             default:
                 $this->setColor('#fefefe');
@@ -157,7 +164,7 @@ class Sensor
         $result = $this->toKeyValue($result);
 
         return $result;
-    }
+     }
 
     public function getLastMonth(TransformerInterface $transformer)
     {
@@ -179,7 +186,7 @@ class Sensor
         return studly_case($this->getName());
     }
 
-    public function getData($period, $group, TransformerInterface $transformer, $limit = 0, $orderby = 'desc')
+    public function getData($period, $group, TransformerInterface $transformer, $limit = 0, $orderby = 'asc')
     {
         $reader = new InfluxReader();
 
@@ -197,7 +204,6 @@ class Sensor
 
 
         return $transformer->transform($data);
-
     }
 
     public function getLatestValue()
@@ -221,9 +227,6 @@ class Sensor
         $result['age'] = $lastTimestamp->addDay(1) < Carbon::now() ?  'old' : 'current';
 
         return $result;
-
-
-
 
     }
 
