@@ -220,9 +220,10 @@ class Sensor
                 ->build()
         );
 
-        $result = $data->first()['values'][0];
+        $result['time'] = $data->first()['values'][0][0];
+        $result['value'] = $data->first()['values'][0][1];
 
-        $lastTimestamp = new Carbon($result[0]);
+        $lastTimestamp = new Carbon($result['time']);
 
         $result['age'] = $lastTimestamp->addDay(1) < Carbon::now() ?  'old' : 'current';
 
