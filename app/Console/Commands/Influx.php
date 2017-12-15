@@ -71,7 +71,7 @@ class Influx extends Command
                     $now->subMinutes(10);
                     $dataPoint = new DataPoint();
                     $dataPoint->setMeasurement($sensor->studlyName());
-                    $dataPoint->setValue(random_int(8, 15));
+                    $dataPoint->setValue(random_int(1, 25));
                     $dataPoint->setArea($sensorNode->zone->area->name);
                     $dataPoint->setZone($sensorNode->zone->name);
                     $dataPoint->setAccountId($sensorNode->account->id);
