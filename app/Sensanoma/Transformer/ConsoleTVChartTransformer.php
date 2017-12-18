@@ -10,11 +10,13 @@ class ConsoleTvChartTransformer implements TransformerInterface
         if(isset($datas['error'])) {
             return $datas['error'];
         }
+
         $values = [];
         $labels = [];
+        $name = '';
 
         foreach ($datas as $serie) {
-
+            $name = $serie['name'];
             foreach ($serie['values'] as $value) {
                 array_push($labels, \Carbon\Carbon::parse($value[0])->toDateString());
                 array_push($values, intval($value[1], 0));
@@ -24,7 +26,8 @@ class ConsoleTvChartTransformer implements TransformerInterface
 
         return [
             'labels' => $labels,
-            'values' => $values
+            'values' => $values,
+            'name'  => $name,
         ];
     }
 

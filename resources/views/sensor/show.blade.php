@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-lg-4 col-xs-6 disabled">
             <!-- small box -->
-            <div class="small-box" style="background-color: {{$sensor->getColor()}}">
+            <div class="small-box" style="background-color: {{$sensor->getColor()}}; color:white;">
                 <div class="inner">
                     @if(is_null($sensor->getLastDay($passThroughTransformer)['value']))
                         <h3>No data received</h3>
@@ -25,10 +25,10 @@
         </div>
         <div class="col-lg-4 col-xs-6">
             <!-- small box -->
-            <div class="small-box" style="background-color: {{$sensor->getColor()}}">
+            <div class="small-box" style="background-color: {{$sensor->getColor()}}; color:white;">
                 <div class="inner">
                     @if(is_null($sensor->getLastWeek($passThroughTransformer)['value']))
-                        <h3>Need more data</h3>
+                        <h3>No data received</h3>
                     @else
                         <h3>{{number_format($sensor->getLastWeek($passThroughTransformer)['value'],2)}}<sup>{{$sensor->getUnit()}}</sup></h3>
                     @endif
@@ -42,11 +42,11 @@
         </div>
         <div class="col-lg-4 col-xs-6">
             <!-- small box -->
-            <div class="small-box" style="background-color: {{$sensor->getColor()}}">
+            <div class="small-box" style="background-color: {{$sensor->getColor()}}; color:white;">
                 <div class="inner">
 
                     @if(is_null($sensor->getLastMonth($passThroughTransformer)['value']))
-                        <h3>Need more data</h3>
+                        <h3>No data received</h3>
                     @else
                     <h3>{{number_format($sensor->getLastMonth($passThroughTransformer)['value'],2)}}<sup>{{$sensor->getUnit()}}</sup></h3>
                     @endif

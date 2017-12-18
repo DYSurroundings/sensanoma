@@ -63,3 +63,16 @@
 .blacked{
     color:black !important;
 }
+.fa-sun-o:before {
+    content: "\f185";
+    color:white;
+}
+.fa-tint:before {
+    content: "\f043";
+    color:white;
+}
+hr.style-two {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}

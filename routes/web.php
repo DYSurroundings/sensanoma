@@ -17,7 +17,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('user' , 'UserController@update');
     // Route::delete('profile/{id}' , 'UserController@destroy');
 
-    Route::get('/dashboard', 'DashboardController@index');
+    Route::get('/dashboard/{sensor?}', 'DashboardController@index');
 
     Route::get('sensor_node/{id}/{sensor}/{date}', 'SensorController@show');
 

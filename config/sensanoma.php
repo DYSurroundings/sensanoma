@@ -11,29 +11,43 @@ return [
                     'name' => 'Air Temperature',
                     'type' => 'air',
                     'unit' => 'Celcius',
-                    'icon' => 'cloud'
+                    'icon' => 'thermometer-half'
+                ],
+                [
+                    'name' => 'Air Humidity',
+                    'type' => 'air',
+                    'unit' => '%',
+                    'icon' => 'tint'
                 ],
                 [
                     'name' => 'Soil Temperature',
                     'type' => 'soil',
-                    'unit' => 'Celcius'
+                    'unit' => 'Celcius',
+                    'icon' => 'thermometer-half'
                 ],
                 [
-                    'name' => 'Water Temperature',
-                    'unit' => 'Celcius',
+                    'name' => 'Soil Humidity',
+                    'type' => 'soil',
+                    'unit' => '%',
                     'icon' => 'tint'
-                ]
-            ]
-        ],
-        'B-Sprouts v2' => [
-            'name' => 'B-Sprouts Urban Farming Prototype v2',
-            'manufacturer' => 'B-Srpouts',
-            'sensors' => [
+                ],
                 [
-                    'name' => 'Solar Lumen',
-                    'type' => 'radiation',
-                    'unit' => 'lumen',
+                    'name' => 'Sensor Lumen',
+                    'type' => 'solar',
+                    'unit' => 'Lumen',
                     'icon' => 'sun-o'
+                ],
+                [
+                    'name' => 'Sensor Voltage',
+                    'type' => 'voltage',
+                    'unit' => 'Volts',
+                    'icon' => 'bolt'
+                ],
+                [
+                    'name' => 'Sensor Temperature',
+                    'type' => 'sensortemp',
+                    'unit' => 'Celcius',
+                    'icon' => 'thermometer-half'
                 ]
             ]
         ]

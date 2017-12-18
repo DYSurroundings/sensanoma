@@ -17,26 +17,29 @@ use Illuminate\Http\Request;
 
 class SensorController
 {
-    public function show($id, $sensor, $date)
+    public function show($id, $sensor, $period)
     {
 
         $passThroughTransformer = new PassThroughTransformer();
 
         $sensor = SensorNode::find($id)->sensor($sensor);
 
-        switch ($date){
+        switch ($period) {
             case '24h':
                 $data = $sensor->getData('1d', '2h', new ConsoleTvChartTransformer());
+                $title = 'Last 24 hours';
                 break;
             case '7days':
-                $data = $sensor->getData('7d', '12h', new ConsoleTvChartTransformer());
+                $data = $sensor->getData('7d', '1d', new ConsoleTvChartTransformer());
+                $title = 'Last 7 days';
                 break;
             case '30days':
-                $data = $sensor->getData('30d', '2d',new ConsoleTvChartTransformer());
+                $data = $sensor->getData('30d', '1d',new ConsoleTvChartTransformer());
+                $title = 'Last 30 days';
                 break;
         }
 
-        $chart = Charts::multi('line', 'highcharts');
+        $chart = Charts::multi('line', 'highcharts')->title($title)->elementLabel($sensor->getUnit());
 
         $chart->labels($data['labels']);
         $chart->dataset($sensor->getName(), $data['values']);

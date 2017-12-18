@@ -58,7 +58,7 @@
                 </div>
                 <!-- /.info-box-content -->
             </div>
-            <h3>Avaiable sensors :</h3>
+            <h3>Available sensors :</h3>
             <ul class="nav nav-stacked nav-pills">
                 @foreach($sensorNode->sensors() as $sensor)
                     <li>

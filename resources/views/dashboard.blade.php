@@ -3,7 +3,6 @@
 @section('title')
     Sensanoma
 @stop
-
 @section('content_header')
     @include('layouts.flash')
     <h1>Dashboard</h1>
@@ -13,13 +12,21 @@
     <div class="row">
         <div class="col-md-12">
             <h1>Daily Average</h1>
-            @foreach($sensors as $sensor)
-            <div class="col-lg-3 col-xs-6">
+            <h1>{{ $sensorNode->name }}</h1>
+            @foreach($sensorNode->sensors() as $sensor)
+                @if($sensor->getType() == 'soil' || $sensor->getType() == 'air')
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                @else
+                    <div class="col-lg-4 col-md-6 col-sm-6">
+                @endif
                 <!-- small box -->
-                <div class="small-box" style="background-color: {{$sensor->getColor()}}">
+                <div class="small-box" style="background-color: {{$sensor->getColor()}}; color: white;">
                     <div class="inner">
-                        <h3>12<sup>{{$sensor->getUnit()}}</sup></h3>
-
+                        @if(is_null($sensor->getLastDay($passThroughTransformer)['value']))
+                            <h4>No data received</h4>
+                        @else
+                            <h3>{{number_format($sensor->getLastDay($passThroughTransformer)['value'],2)}}<sup>{{$sensor->getUnit()}}</sup></h3>
+                        @endif
                         <p>{{$sensor->getName()}} ({{$sensor->sensorNode()->name}})</p>
                     </div>
                     <div class="icon">
@@ -30,7 +37,14 @@
                 </div>
             </div>
             @endforeach
-
+                <div class="row">
+                    <div class="app">
+                        {!! $chart->html() !!}
+                    </div>
+                    <!-- End Of Main Application -->
+                    {!! Charts::scripts() !!}
+                    {!! $chart->script() !!}
+                </div>
         </div>
     </div>
 

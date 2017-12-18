@@ -59,7 +59,7 @@
             }
         </script>
 
-        <script src="https://maps.googleapis.com/maps/api/js?key= {{ env('GOOGLE_API_KEY') }} &libraries=drawing&callback=DrawMapWithPolygon"
+        <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_API_KEY') }}&libraries=drawing&callback=DrawMapWithPolygon"
                 async defer></script>
     @endif
 

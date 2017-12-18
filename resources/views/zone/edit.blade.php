@@ -67,7 +67,7 @@
 @stop
 
 @section('js')
-    <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_KEY') }}&libraries=drawing" async
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_API_KEY') }}&libraries=drawing" async
             defer></script>
 
 @stop

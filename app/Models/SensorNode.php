@@ -67,7 +67,7 @@ class SensorNode extends Model
 
     public function getValue($sensorName)
     {
-        return $this->sensor($sensorName)->getLastValue();
+        return $this->sensor($sensorName)->getLatestValue();
     }
 
 
